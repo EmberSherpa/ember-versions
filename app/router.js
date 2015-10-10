@@ -6,6 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('release', {path: ':version'}, function(){
+    this.route('change', {path: ':slug'});
+  });
 });
 
 export default Router;

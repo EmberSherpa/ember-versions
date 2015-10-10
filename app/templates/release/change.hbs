@@ -1,0 +1,3 @@
+<h2>{{model.change.title}}</h2>
+<p>{{model.change.description}}</p>
+{{component (concat (slugify model.release.version) '-' model.change.slug)}}

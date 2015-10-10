@@ -1,0 +1,51 @@
+{{#ember-markdown-section}}
+`\{{get}}` helper takes 2 arguments `\{{get object propertyName}}`. Its similar
+to `Ember.get(object, propertyName)` but for your template. It will return value
+assigned to `object[propertyName]`.
+
+For example, lets say we have a user in our application and the user can be
+contacted in several ways, but want to default to user's preferred contact method.
+We might have a model that looks something like this.
+{{/ember-markdown-section}}
+
+{{code-snippet name="21-get-helper-user-model.js"}}
+
+{{#ember-markdown-section}}
+To output the prefered contact method, we can do the following:
+1. get prefered method with `\{{user.preferredContactMethod}}`
+2. use `\{{get}}` helper to retrieve the value with `\{{get user user.preferredContactMethod}}`
+
+`\{{get user user.preferredContactMethod}}` becomes equivalent to `\{{get user 'phone'}}`
+but is dynamic, so when `\{{user.preferredContactMethod}}` changes output will
+be updated.
+
+Let's put it all together
+{{/ember-markdown-section}}
+
+{{code-snippet name="21-get-helper-example.hbs"}}
+
+{{! BEGIN-SNIPPET 21-get-helper-example}}
+{{user.preferredContactMethod}}: {{get user user.preferredContactMethod}}
+{{! END-SNIPPET}}
+
+<p>
+  <label>Change preferred contact method</label>
+  <select onchange={{action (mut user.preferredContactMethod) value="target.value"}}>
+    {{#each user.availableContactMethods as |option|}}
+      <option value={{option}} selected={{eq option user.preferredContactMethod}}>{{option}}</option>
+    {{/each}}
+  </select>
+</p>
+
+{{#ember-markdown-section}}
+`\{{get}}` helper can be used as a subexpression.
+
+For example, lets say you have a helper that formats string based on type,
+you could pass the result of `\{{get}}` output to this format helper.
+{{/ember-markdown-section}}
+
+{{code-snippet name="21-get-helper-subexpression.hbs"}}
+
+{{! BEGIN-SNIPPET 21-get-helper-subexpression}}
+{{user.preferredContactMethod}}: {{format (get user user.preferredContactMethod) type=user.preferredContactMethod}}
+{{! END-SNIPPET}}

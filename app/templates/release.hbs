@@ -1,0 +1,7 @@
+<h1>{{model.version}}</h1>
+<ul>
+{{#each model.changes as |change|}}
+  <li>{{#link-to 'release.change' change.slug}}{{change.title}}{{/link-to}}</li>
+{{/each}}
+</ul>
+{{outlet}}
