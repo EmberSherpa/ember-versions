@@ -1,0 +1,38 @@
+{{#ember-markdown-section}}
+`\{{each-in}}` helper iterates over properties of an object.
+{{/ember-markdown-section}}
+
+{{code-snippet name="21-each-in-helper.js"}}
+
+{{! BEGIN-SNIPPET 21-each-in-helper}}
+<ul>
+  {{#each-in contacts as |index value|}}
+    <li>{{index}}: {{value}}</li>
+  {{/each-in}}
+</ul>
+{{! END-SNIPPET}}
+
+{{code-snippet name="21-each-in-helper.hbs"}}
+
+{{! BEGIN-SNIPPET 21-each-in-helper-input}}
+<ul>
+  {{#each-in contacts as |index value|}}
+    <li>
+      <label>{{index}}
+        <input value={{value}}
+              oninput={{action (mut value) value="target.value"}}>
+      </label>
+    </li>
+  {{/each-in}}
+  <li>
+    <input value={{newPropName}}
+           oninput={{action (mut newPropName) value="target.value"}}>:
+    <input value={{newPropValue}}
+           oninput={{action (mut newPropValue) value="target.value"}}>
+    <button {{action 'setProperty'}}>Set</button>
+    <button {{action 'mergeProperty'}}>Merge</button>
+  </li>
+</ul>
+{{! END-SNIPPET}}
+
+{{code-snippet name="21-each-in-helper-actions.js"}}
